@@ -1,39 +1,47 @@
 package com.school;
 
 public class AttendanceRecord {
-    private int studentId;
-    private int courseId;
+    private Student student;
+    private Course course;
     private String status;
 
-    public AttendanceRecord(int studentId, int courseId, String status) {
-        this.studentId = studentId;
-        this.courseId = courseId;
+    public AttendanceRecord(Student student, Course course, String status) {
+        this.student = student;
+        this.course = course;
 
         if (status.equalsIgnoreCase("Present") || status.equalsIgnoreCase("Absent")) {
-            this.status = status.substring(0,1).toUpperCase() + status.substring(1).toLowerCase();
+            this.status = status.substring(0, 1).toUpperCase() + status.substring(1).toLowerCase();
         } else {
             this.status = "Invalid";
-            System.out.println("⚠️ Warning: Invalid status entered. Defaulting to 'Invalid'.");
+            System.out.println("⚠️ Warning: Invalid status entered for student: " 
+                + student.getName() + ". Defaulting to 'Invalid'.");
         }
     }
 
     // Getters
-    public int getStudentId() {
-        return studentId;
+    public Student getStudent() {
+        return student;
     }
 
-    public int getCourseId() {
-        return courseId;
+    public Course getCourse() {
+        return course;
     }
 
     public String getStatus() {
         return status;
     }
 
-    // Display method
+    // Display method - richer display with polymorphic data
     public void displayRecord() {
-        System.out.println("Student ID: " + studentId 
-            + " | Course ID: " + courseId 
-            + " | Status: " + status);
+        System.out.println(
+            "Student: " + student.getName() + " (ID: " + student.getStudentId() + ") | " +
+            "Course: " + course.getCourseName() + " (C" + course.getCourseId() + ") | " +
+            "Status: " + status
+        );
+    }
+
+    // For saving to file: keep it simple with IDs
+    public String toDataString() {
+        return student.getStudentId() + "," + course.getCourseId() + "," + status;
     }
 }
