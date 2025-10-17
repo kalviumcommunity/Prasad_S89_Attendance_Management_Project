@@ -1,104 +1,3 @@
-// package com.school;
-
-// public class Main {
-//     public static void main(String[] args) {
-//         System.out.println("Welcome to the School Attendance System!");
-//         System.out.println("Session 1: Project setup and Orientation complete");
-//     }
-// }
-
-// package com.school;
-
-// public class Main {
-//     public static void main(String[] args) {
-//         System.out.println("--- School Attendance System ---");
-
-//         Student[] students = new Student[2];
-//         students[0] = new Student();
-//         students[0].setDetails(1, "Alice");
-//         students[1] = new Student();
-//         students[1].setDetails(2, "Bob");
-
-//         Course[] courses = new Course[2];
-//         courses[0] = new Course();
-//         courses[0].setDetails("CS101", "Intro to programming");
-//         courses[1] = new Course();
-//         courses[1].setDetails("MA101", "Calculus I");
-
-//         System.out.println("\nRegistered Students:");
-//         for (Student student : students) {
-//             if(student != null) {
-//                 student.displayDetails();
-//             }
-//         }
-//         System.out.println("\nAvailable Courses:");
-//         for (Course course : courses) {
-//             if(course != null) {
-//                 course.displayDetails();
-//             }
-//         }
-//         System.out.println("\nSession 2: Core Domain Modelling Complete");
-//     }
-// }
-
-// package com.school;
-
-
-// public class Main{
-//     public static void main(String[] args){
-//         System.out.println("----Attendence Management System----");
-//         Student[] students = new Student[2];
-//         students[0] = new Student();
-//         students[0].setDetails(1, "Hemanth" );
-//         students[1] = new Student();
-//         students[1].setDetails(2, "Sai" );
-
-//          System.out.println("---Registered Students---");
-//         for(Student student: students){
-//             if(student != null){
-//                 student.displayDetails();
-//             }
-//         }
-
-
-//         Course[]  courses = new Course[2];
-//         courses[0] = new Course();
-//         courses[0].setDetails("CJAVA", "Java" );
-//         courses[1] = new Course();
-//         courses[1].setDetails("CPYTHON", "Python" );
-
-
-       
-//         System.out.println("---Registered Courses---");
-//         for(Course course: courses){
-//            if(course != null){
-//             course.displayDetails();
-//            }
-//         }
-
-//         System.out.println("---Marking Attendance---");
-//         Attendance[] attendanceRecords = new Attendance[2];
-
-//          attendanceRecords[0] = new Attendance();
-//           attendanceRecords[0].markAttendance(1, "CJAVA", true);
-
-//          attendanceRecords[1] = new Attendance();
-//          attendanceRecords[1].markAttendance(2, "CPYTHON", false);
-
-//        for (Attendance attendance : attendanceRecords) {
-//            if (attendance != null) {
-//              attendance.getAttendance();
-//           }
-// }
-
-
-
-
-//         System.out.println("Session 2: Student and Course classes created.");
-//         System.out.println("Session 3: Attendance feature added.");
-//     }
-// }
-
 package com.school;
 
 import java.util.ArrayList;
@@ -108,36 +7,73 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("---- Attendance Management System ----");
 
-        // Create students
-        Student s1 = new Student("Alice");
-        Student s2 = new Student("Bob");
+        // --- Register Students ---
+        Student student1 = new Student("Hemanth");
+        Student student2 = new Student("Sai");
 
-        // Create courses
-        Course c1 = new Course("Mathematics");
-        Course c2 = new Course("Science");
+        List<Student> students = new ArrayList<>();
+        students.add(student1);
+        students.add(student2);
 
-        // Display students & courses
-        System.out.println("--- Registered Students ---");
-        s1.displayDetails();
-        s2.displayDetails();
+        System.out.println("\n--- Registered Students ---");
+        for (Student s : students) {
+            s.displayDetails();
+        }
 
-        System.out.println("--- Registered Courses ---");
-        c1.displayDetails();
-        c2.displayDetails();
+        // --- Register Teachers ---
+        Teacher teacher1 = new Teacher("Mr. Ramesh", "Mathematics");
+        Teacher teacher2 = new Teacher("Mrs. Sita", "Computer Science");
 
-        // Attendance Records
-        System.out.println("--- Attendance Log ---");
+        List<Teacher> teachers = new ArrayList<>();
+        teachers.add(teacher1);
+        teachers.add(teacher2);
+
+        System.out.println("\n--- Registered Teachers ---");
+        for (Teacher t : teachers) {
+            t.displayDetails();
+        }
+
+        // --- Register Staff ---
+        Staff staff1 = new Staff("Kiran", "Administrator");
+        Staff staff2 = new Staff("Latha", "Librarian");
+
+        List<Staff> staffList = new ArrayList<>();
+        staffList.add(staff1);
+        staffList.add(staff2);
+
+        System.out.println("\n--- Registered Staff ---");
+        for (Staff st : staffList) {
+            st.displayDetails();
+        }
+
+        // --- Register Courses ---
+        Course course1 = new Course("Java Programming");
+        Course course2 = new Course("Python Basics");
+
+        List<Course> courses = new ArrayList<>();
+        courses.add(course1);
+        courses.add(course2);
+
+        System.out.println("\n--- Registered Courses ---");
+        for (Course c : courses) {
+            c.displayDetails();
+        }
+
+        // --- Mark Attendance ---
+        System.out.println("\n--- Attendance Log ---");
         List<Attendance> attendanceLog = new ArrayList<>();
 
-        attendanceLog.add(new Attendance(s1.getStudentId(), c1.getCourseId(), "Present"));
-        attendanceLog.add(new Attendance(s2.getStudentId(), c2.getCourseId(), "Absent"));
-        attendanceLog.add(new Attendance(s1.getStudentId(), c2.getCourseId(), "Late")); // invalid test
+        // Valid entries
+        attendanceLog.add(new Attendance(student1.getStudentId(), course1.getCourseId(), "Present"));
+        attendanceLog.add(new Attendance(student2.getStudentId(), course2.getCourseId(), "Absent"));
 
-        // Display
+        // Invalid status test
+        attendanceLog.add(new Attendance(student1.getStudentId(), course2.getCourseId(), "Late"));
+
         for (Attendance record : attendanceLog) {
             record.displayRecord();
         }
 
-        System.out.println("Session 4: Data Encapsulation & Attendance Recording Validation Complete.");
+        System.out.println("\n✅ Session Complete: All modules integrated successfully!");
     }
 }
